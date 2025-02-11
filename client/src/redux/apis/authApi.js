@@ -21,4 +21,20 @@ export const userData = () => {
     return apiClient.post(`${apiClient.Urls.logout}`,{},true);
   };
   
+  export const verifyOtp = () => {
+    return apiClient.post(`${apiClient.Urls.verifyOtp}`,{},true);
+  };
+
+  export const verifyEmail = (payload) => {
+    return apiClient.post(`${apiClient.Urls.verifyEmail}`,payload,true);
+  };
+
+  export const resendOtp = (payload) => {
+    return apiClient.post(`${apiClient.Urls.resendOtp}`,payload,true);
+  };
+
+  export const resetPassword = (payload) => {
+    return apiClient.post(`${apiClient.Urls.resetPassword}`,payload,true);
+  };
+  
   

@@ -9,6 +9,8 @@ import {
   setUserData,
   authRegister,
 } from "../redux/slices/authSlice.js";
+import LocalStorage from "../utils/localStorage.js";
+
 import { useDispatch, useSelector } from "react-redux";
 const Login = () => {
   const navigate = useNavigate();
@@ -22,6 +24,8 @@ const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -37,7 +41,7 @@ const Login = () => {
 
       if (state === "Sign Up") {
         if (response.success) {
-          setIsLoggedIn(true);
+          //dispatch(setIsLoggedIn(true));
           navigate("/");
           message.success("Welcome to Authentication System!");
         } else {
@@ -45,7 +49,7 @@ const Login = () => {
         }
       } else {
         if (response.success) {
-          setIsLoggedIn(true);
+          //dispatch(setIsLoggedIn(true));
           navigate("/");
           message.success("Welcome back developer!");
         } else {
@@ -56,10 +60,19 @@ const Login = () => {
       message.error(error.message || "Something went wrong!");
     }
   };
+  
+  useEffect(() => {
+    const storedIsLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
+    if (storedIsLoggedIn) {
+      dispatch(setIsLoggedIn(storedIsLoggedIn)); // Restore state from localStorage
+    }
+  }, []);
+ 
+
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen  px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
-      <img
+    <div className="flex items-center justify-center min-h-screen  px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
+      <img 
         onClick={() => navigate("/")}
         src={assets.logo}
         className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"

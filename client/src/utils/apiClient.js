@@ -6,14 +6,6 @@ export const apiUrl =
 const encodeQueryData = (params) =>
   "?" + new URLSearchParams(params).toString();
 
-const getLocalToken = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const authToken = user?.token;
-  return authToken ? `Bearer ${authToken}` : "";
-};
-
-
-
 const apiClient = {
   Urls: {
     apiUrl,
@@ -22,6 +14,10 @@ const apiClient = {
     userData: `${apiUrl}/api/user/data`,
     isAuth: `${apiUrl}/api/auth/is-auth`,
     logout: `${apiUrl}/api/auth/logout`,
+    verifyOtp: `${apiUrl}/api/auth/send-verify-otp`,
+    verifyEmail: `${apiUrl}/api/auth/verify-account`,
+    resendOtp: `${apiUrl}/api/auth/send-reset-otp`,
+    resetPassword: `${apiUrl}/api/auth/reset-password`,
   },
 
   make: function (url, method, params, auth, type) {
